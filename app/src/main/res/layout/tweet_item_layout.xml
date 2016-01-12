@@ -1,5 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <android.support.v7.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/card_view"
     android:layout_height="wrap_content"
     android:layout_width="match_parent"
     xmlns:card_view="http://schemas.android.com/apk/res-auto"
@@ -8,28 +10,34 @@
 
     <RelativeLayout
         android:layout_width="match_parent"
-        android:layout_height="match_parent">
+        android:layout_height="wrap_content">
 
         <ImageView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:id="@+id/user_avatar"/>
-
-        <TextView
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_toLeftOf="@id/user_avatar"
-            android:id="@+id/user_name"
+            android:src="@drawable/avatar"
+            android:id="@+id/user_avatar"
+            android:padding="4dp"
+            android:scaleType="centerInside"
             />
 
         <TextView
-            android:layout_width="match_parent"
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_toLeftOf="@id/user_avatar"
+            android:layout_alignParentTop="true"
+            android:layout_toRightOf="@id/user_avatar"
+            android:id="@+id/user_name"
+            tools:text="Juntao Qiu"
+            />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
             android:layout_below="@id/user_name"
+            android:layout_toRightOf="@id/user_avatar"
             android:id="@+id/user_comment"
+            tools:text="Hello, darkness, my old friend"
             />
     </RelativeLayout>
 
-    <!--<include layout="@android:layout/simple_list_item_1"></include>-->
 </android.support.v7.widget.CardView>
