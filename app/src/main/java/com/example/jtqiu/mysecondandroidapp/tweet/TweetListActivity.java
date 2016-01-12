@@ -30,7 +30,6 @@ import butterknife.ButterKnife;
 public class TweetListActivity extends AppCompatActivity {
     @Bind(value = R.id.tweet_recycler_list) RecyclerView recyclerView;
 
-    List<Tweet> tweets;
     private TweetListRecycleAdaptor tweetListRecycleAdaptor = new TweetListRecycleAdaptor();
 
     @Override
@@ -61,7 +60,6 @@ public class TweetListActivity extends AppCompatActivity {
 
             try {
                 InputStreamReader inputStreamReader = new InputStreamReader(getAssets().open("tweets.json"));
-//                Reader reader = new InputStreamReader(new FileInputStream("assets/tweets.json"));
                 List<Tweet> tweets = Arrays.asList(gson.fromJson(inputStreamReader, Tweet[].class));
                 bindData(tweets);
                 Log.e("TweetList", tweets.toString());

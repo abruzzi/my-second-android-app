@@ -14,7 +14,7 @@
         android:layout_width="match_parent"
         android:layout_height="120dp"
         android:contentDescription="@string/hero_image"
-        android:src="@drawable/hero_image"
+        android:src="@drawable/hero_image_origin"
         />
 
     <android.support.v7.widget.RecyclerView
