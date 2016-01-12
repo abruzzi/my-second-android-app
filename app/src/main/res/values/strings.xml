@@ -1,4 +1,5 @@
 <resources>
     <string name="app_name">My Second App</string>
-    <string name="button_submit">Submit</string>
+    <string name="button_submit">Go</string>
+    <string name="hint_text">name@mail.com</string>
 </resources>

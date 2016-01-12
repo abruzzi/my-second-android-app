@@ -3,8 +3,12 @@ package com.example.jtqiu.mysecondandroidapp;
 import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.text.Editable;
+import android.text.TextWatcher;
+import android.view.KeyEvent;
 import android.view.View;
 import android.widget.EditText;
+import android.widget.TextView;
 
 public class FormActivity extends AppCompatActivity {
 
