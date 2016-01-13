@@ -25,6 +25,14 @@
         </activity>
         <activity android:name=".UserProfileActivity" >
         </activity>
+
+        <service
+            android:name=".service.DataLoaderIntentService"
+            android:exported="false" >
+            <intent-filter>
+                <action android:name="com.example.jtqiu.mysecondandroidapp.tweet.TweetListActivity.TWEETS_READY" />
+            </intent-filter>
+        </service>
     </application>
 
 </manifest>

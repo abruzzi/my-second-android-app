@@ -1,6 +1,11 @@
 package com.example.jtqiu.mysecondandroidapp.tweet;
 
+import android.content.BroadcastReceiver;
+import android.content.Context;
+import android.content.Intent;
+import android.content.IntentFilter;
 import android.os.AsyncTask;
+import android.support.v4.content.LocalBroadcastManager;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.LinearLayoutManager;
@@ -9,11 +14,13 @@ import android.util.Log;
 
 import com.example.jtqiu.mysecondandroidapp.R;
 import com.example.jtqiu.mysecondandroidapp.model.Tweet;
+import com.example.jtqiu.mysecondandroidapp.service.DataLoaderIntentService;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 
 import java.io.IOException;
 import java.io.InputStreamReader;
+import java.io.Serializable;
 import java.util.Arrays;
 import java.util.List;
 
@@ -24,6 +31,18 @@ public class TweetListActivity extends AppCompatActivity {
     @Bind(value = R.id.tweet_recycler_list) RecyclerView recyclerView;
 
     private TweetListRecyclerAdaptor tweetListRecycleAdaptor = new TweetListRecyclerAdaptor();
+    private BroadcastReceiver receiver = new ResponseReceiver();
+
+    public class ResponseReceiver extends BroadcastReceiver {
+        public static final String TWEETS_READY = "com.example.jtqiu.mysecondandroidapp.tweet.TweetListActivity.TWEETS_READY";
+
+        @Override
+        public void onReceive(Context context, Intent intent) {
+            Serializable tweets = intent.getSerializableExtra("tweets");
+            tweetListRecycleAdaptor.setTweetList((List<Tweet>) tweets);
+            tweetListRecycleAdaptor.notifyDataSetChanged();
+        }
+    }
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -35,33 +54,24 @@ public class TweetListActivity extends AppCompatActivity {
         recyclerView.setAdapter(tweetListRecycleAdaptor);
         recyclerView.setLayoutManager(new LinearLayoutManager(this));
 
-        TweetFetcher fetcher = new TweetFetcher();
-        fetcher.execute();
+        Intent intent = new Intent(ResponseReceiver.TWEETS_READY);
+        startService(intent);
     }
 
-    private void bindData(List<Tweet> tweets) {
-        tweetListRecycleAdaptor.setTweetList(tweets);
-        tweetListRecycleAdaptor.notifyDataSetChanged();
+    @Override
+    protected void onResume() {
+        super.onResume();
+
+        IntentFilter intentFilter = new IntentFilter(ResponseReceiver.TWEETS_READY);
+        LocalBroadcastManager localBroadcastManager = LocalBroadcastManager.getInstance(this);
+        localBroadcastManager.registerReceiver(receiver, intentFilter);
     }
 
-    private class TweetFetcher extends AsyncTask<Void, Void, String> {
+    @Override
+    protected void onPause() {
+        super.onPause();
 
-        @Override
-        protected String doInBackground(Void... voids) {
-            GsonBuilder gsonBuilder = new GsonBuilder();
-            Gson gson = gsonBuilder.create();
-
-            try {
-                InputStreamReader inputStreamReader = new InputStreamReader(getAssets().open("tweets.json"));
-                List<Tweet> tweets = Arrays.asList(gson.fromJson(inputStreamReader, Tweet[].class));
-                bindData(tweets);
-                Log.e("TweetList", tweets.toString());
-                inputStreamReader.close();
-            } catch (IOException e) {
-                e.printStackTrace();
-            }
-
-            return null;
-        }
+        LocalBroadcastManager localBroadcastManager = LocalBroadcastManager.getInstance(this);
+        localBroadcastManager.unregisterReceiver(receiver);
     }
 }

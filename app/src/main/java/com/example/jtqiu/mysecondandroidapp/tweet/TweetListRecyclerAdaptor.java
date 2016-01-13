@@ -1,18 +1,14 @@
 package com.example.jtqiu.mysecondandroidapp.tweet;
 
-import android.content.Context;
-import android.content.Intent;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
-import android.view.View;
 import android.view.ViewGroup;
-import android.widget.ImageView;
-import android.widget.TextView;
 
 import com.example.jtqiu.mysecondandroidapp.R;
-import com.example.jtqiu.mysecondandroidapp.UserProfileActivity;
 import com.example.jtqiu.mysecondandroidapp.model.Tweet;
-import com.squareup.picasso.Picasso;
+import com.example.jtqiu.mysecondandroidapp.tweet.viewholders.FooterViewHolder;
+import com.example.jtqiu.mysecondandroidapp.tweet.viewholders.HeaderViewHolder;
+import com.example.jtqiu.mysecondandroidapp.tweet.viewholders.TweetViewHolder;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -61,11 +57,6 @@ public class TweetListRecyclerAdaptor extends RecyclerView.Adapter<RecyclerView.
         }
     }
 
-    private boolean isNormalItem(int position) {
-        return position != 0 && position != tweetList.size() + 1;
-    }
-
-
     @Override
     public int getItemCount() {
         return tweetList.size()+2; //plus header and footer
@@ -86,77 +77,4 @@ public class TweetListRecyclerAdaptor extends RecyclerView.Adapter<RecyclerView.
         this.tweetList = tweetList;
     }
 
-    static class HeaderViewHolder extends RecyclerView.ViewHolder {
-        ImageView heroImage;
-        ImageView myAvatar;
-        TextView myName;
-
-        Context context;
-
-        public HeaderViewHolder(View itemView) {
-            super(itemView);
-            context = itemView.getContext();
-            heroImage = (ImageView) itemView.findViewById(R.id.hero_image);
-            myAvatar = (ImageView) itemView.findViewById(R.id.my_avatar);
-            myName = (TextView) itemView.findViewById(R.id.my_name);
-
-            myAvatar.setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View v) {
-                    switchToUserProfile();
-                }
-            });
-        }
-
-        private void switchToUserProfile() {
-            Intent intent = new Intent(context, UserProfileActivity.class);
-            context.startActivity(intent);
-        }
-
-        public void populate(Object obj) {
-            myName.setText("Juntao Qiu");
-        }
-
-    }
-
-    static class FooterViewHolder extends RecyclerView.ViewHolder {
-
-        public FooterViewHolder(View itemView) {
-            super(itemView);
-        }
-
-        public void populate(Object obj) {
-
-        }
-    }
-
-    static class TweetViewHolder extends RecyclerView.ViewHolder {
-        ImageView avatar;
-        TextView userName;
-        TextView userTweet;
-
-        Context context;
-        public TweetViewHolder(View itemView) {
-            super(itemView);
-            context = itemView.getContext();
-            avatar = (ImageView)itemView.findViewById(R.id.user_avatar);
-            userName = (TextView)itemView.findViewById(R.id.user_name);
-            userTweet = (TextView)itemView.findViewById(R.id.user_comment);
-        }
-
-        public void populate(Object obj) {
-            Tweet tweet = (Tweet)obj;
-
-            String avatarUrl = tweet.getSender().getAvatar();
-            Picasso.with(context).load(avatarUrl)
-                    .resize(50, 50)
-                    .centerCrop()
-                    .placeholder(R.drawable.avatar_placeholder)
-                    .error(R.drawable.avatar_placeholder)
-                    .into(this.avatar);
-
-            userName.setText(tweet.getSender().getUsername());
-            userTweet.setText(tweet.getContent());
-        }
-    }
 }

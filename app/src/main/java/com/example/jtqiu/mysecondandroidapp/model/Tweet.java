@@ -3,10 +3,11 @@ package com.example.jtqiu.mysecondandroidapp.model;
 
 import com.google.gson.annotations.Expose;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 
-public class Tweet {
+public class Tweet implements Serializable {
 
     @Expose
     private String content;
