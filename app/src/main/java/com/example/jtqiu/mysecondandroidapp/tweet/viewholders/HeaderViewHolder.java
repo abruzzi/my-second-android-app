@@ -8,7 +8,7 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.example.jtqiu.mysecondandroidapp.R;
-import com.example.jtqiu.mysecondandroidapp.UserProfileActivity;
+import com.example.jtqiu.mysecondandroidapp.tweet.UserProfileActivity;
 
 public class HeaderViewHolder extends RecyclerView.ViewHolder {
     ImageView heroImage;

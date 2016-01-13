@@ -11,8 +11,8 @@
         android:id="@+id/tweet_recycler_list"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:layout_below="@id/hero_image"
         tools:listitem="@layout/tweet_item_layout"
         android:background="@color/cardview_light_background"
         />
+
 </RelativeLayout>

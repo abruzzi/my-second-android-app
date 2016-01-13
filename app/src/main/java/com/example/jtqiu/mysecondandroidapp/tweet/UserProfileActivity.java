@@ -1,8 +1,10 @@
-package com.example.jtqiu.mysecondandroidapp;
+package com.example.jtqiu.mysecondandroidapp.tweet;
 
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.widget.TextView;
+
+import com.example.jtqiu.mysecondandroidapp.R;
 
 import butterknife.Bind;
 import butterknife.ButterKnife;
