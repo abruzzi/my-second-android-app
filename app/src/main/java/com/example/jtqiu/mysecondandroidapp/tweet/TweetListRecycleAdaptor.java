@@ -149,7 +149,6 @@ public class TweetListRecycleAdaptor extends RecyclerView.Adapter<RecyclerView.V
             Tweet tweet = (Tweet)obj;
 
             String avatarUrl = tweet.getSender().getAvatar();
-            System.err.println(avatarUrl);
             Picasso.with(context).load(avatarUrl)
                     .resize(50, 50)
                     .centerCrop()
