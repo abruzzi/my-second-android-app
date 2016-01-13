@@ -19,7 +19,6 @@
         <activity android:name=".tweet.TweetListActivity" >
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
-
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
@@ -33,6 +32,9 @@
                 <action android:name="com.example.jtqiu.mysecondandroidapp.tweet.TweetListActivity.TWEETS_READY" />
             </intent-filter>
         </service>
+
+        <activity android:name=".tweet.ImageGridActivity" >
+        </activity>
     </application>
 
 </manifest>

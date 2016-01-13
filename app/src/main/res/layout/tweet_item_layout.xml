@@ -29,7 +29,8 @@
             android:layout_alignParentTop="true"
             android:layout_toRightOf="@id/user_avatar"
             android:capitalize="words"
-            android:textSize="24sp"
+            android:padding="4dp"
+            android:textSize="20sp"
             android:id="@+id/user_name"
             tools:text="@string/test_user_name"
             />
@@ -39,11 +40,26 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_below="@id/user_name"
-            android:layout_marginTop="4dp"
+            android:layout_marginTop="6dp"
             android:layout_toRightOf="@id/user_avatar"
+            android:padding="4dp"
             android:textSize="16sp"
             tools:text="@string/test_user_comment"
             />
+
+        <GridView xmlns:android="http://schemas.android.com/apk/res/android"
+            android:id="@+id/image_grid"
+            android:numColumns="auto_fit"
+            android:gravity="center"
+            android:columnWidth="80dp"
+            android:stretchMode="columnWidth"
+            android:layout_width="fill_parent"
+            android:layout_height="fill_parent"
+            android:layout_below="@id/user_comment"
+            android:layout_alignLeft="@id/user_comment"
+            >
+
+        </GridView>
     </RelativeLayout>
 
 </android.support.v7.widget.CardView>
