@@ -9,18 +9,11 @@ import android.util.Log;
 
 import com.example.jtqiu.mysecondandroidapp.R;
 import com.example.jtqiu.mysecondandroidapp.model.Tweet;
-import com.example.jtqiu.mysecondandroidapp.model.User;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 
-import java.io.File;
-import java.io.FileInputStream;
-import java.io.FileNotFoundException;
 import java.io.IOException;
-import java.io.InputStream;
 import java.io.InputStreamReader;
-import java.io.Reader;
-import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
@@ -30,7 +23,7 @@ import butterknife.ButterKnife;
 public class TweetListActivity extends AppCompatActivity {
     @Bind(value = R.id.tweet_recycler_list) RecyclerView recyclerView;
 
-    private TweetListRecycleAdaptor tweetListRecycleAdaptor = new TweetListRecycleAdaptor();
+    private TweetListRecyclerAdaptor tweetListRecycleAdaptor = new TweetListRecyclerAdaptor();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {

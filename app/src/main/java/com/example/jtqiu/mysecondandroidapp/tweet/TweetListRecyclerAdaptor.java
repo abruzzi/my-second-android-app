@@ -17,7 +17,7 @@ import com.squareup.picasso.Picasso;
 import java.util.ArrayList;
 import java.util.List;
 
-public class TweetListRecycleAdaptor extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
+public class TweetListRecyclerAdaptor extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
     List<Tweet> tweetList = new ArrayList<>();
 
     private static final int NORMAL = 0;
@@ -47,16 +47,16 @@ public class TweetListRecycleAdaptor extends RecyclerView.Adapter<RecyclerView.V
 
     @Override
     public void onBindViewHolder(RecyclerView.ViewHolder holder, int position) {
-        if(isNormalItem(position) && holder.getItemViewType() == NORMAL) {
+        if(holder.getItemViewType() == NORMAL) {
             Tweet tweet = tweetList.get(position-1);
             ((TweetViewHolder)holder).populate(tweet);
         }
 
-        if (position == 0 && holder.getItemViewType() == HEADER) {
+        if (holder.getItemViewType() == HEADER) {
             ((HeaderViewHolder)holder).populate(null);
         }
 
-        if (position == tweetList.size()+1 && holder.getItemViewType() == FOOTER) {
+        if (holder.getItemViewType() == FOOTER) {
             ((FooterViewHolder)holder).populate(null);
         }
     }
@@ -85,7 +85,6 @@ public class TweetListRecycleAdaptor extends RecyclerView.Adapter<RecyclerView.V
     public void setTweetList(List<Tweet> tweetList) {
         this.tweetList = tweetList;
     }
-
 
     static class HeaderViewHolder extends RecyclerView.ViewHolder {
         ImageView heroImage;
