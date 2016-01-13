@@ -11,11 +11,8 @@ import android.widget.TextView;
 
 import com.example.jtqiu.mysecondandroidapp.R;
 import com.example.jtqiu.mysecondandroidapp.UserProfileActivity;
-import com.example.jtqiu.mysecondandroidapp.model.Image;
 import com.example.jtqiu.mysecondandroidapp.model.Tweet;
-import com.example.jtqiu.mysecondandroidapp.model.User;
-
-import org.w3c.dom.Text;
+import com.squareup.picasso.Picasso;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -50,7 +47,7 @@ public class TweetListRecycleAdaptor extends RecyclerView.Adapter<RecyclerView.V
 
     @Override
     public void onBindViewHolder(RecyclerView.ViewHolder holder, int position) {
-        if(position != 0 && position != tweetList.size()+1 && holder.getItemViewType() == NORMAL) {
+        if(isNormalItem(position) && holder.getItemViewType() == NORMAL) {
             Tweet tweet = tweetList.get(position-1);
             ((TweetViewHolder)holder).populate(tweet);
         }
@@ -62,6 +59,10 @@ public class TweetListRecycleAdaptor extends RecyclerView.Adapter<RecyclerView.V
         if (position == tweetList.size()+1 && holder.getItemViewType() == FOOTER) {
             ((FooterViewHolder)holder).populate(null);
         }
+    }
+
+    private boolean isNormalItem(int position) {
+        return position != 0 && position != tweetList.size() + 1;
     }
 
 
@@ -135,8 +136,10 @@ public class TweetListRecycleAdaptor extends RecyclerView.Adapter<RecyclerView.V
         TextView userName;
         TextView userTweet;
 
+        Context context;
         public TweetViewHolder(View itemView) {
             super(itemView);
+            context = itemView.getContext();
             avatar = (ImageView)itemView.findViewById(R.id.user_avatar);
             userName = (TextView)itemView.findViewById(R.id.user_name);
             userTweet = (TextView)itemView.findViewById(R.id.user_comment);
@@ -144,7 +147,16 @@ public class TweetListRecycleAdaptor extends RecyclerView.Adapter<RecyclerView.V
 
         public void populate(Object obj) {
             Tweet tweet = (Tweet)obj;
-            avatar.setImageURI(null);
+
+            String avatarUrl = tweet.getSender().getAvatar();
+            System.err.println(avatarUrl);
+            Picasso.with(context).load(avatarUrl)
+                    .resize(50, 50)
+                    .centerCrop()
+                    .placeholder(R.drawable.avatar_placeholder)
+                    .error(R.drawable.avatar_placeholder)
+                    .into(this.avatar);
+
             userName.setText(tweet.getSender().getUsername());
             userTweet.setText(tweet.getContent());
         }
