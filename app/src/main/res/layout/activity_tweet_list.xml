@@ -7,21 +7,11 @@
     android:paddingBottom="@dimen/activity_vertical_margin"
     tools:context="com.example.jtqiu.mysecondandroidapp.tweet.TweetListActivity">
 
-
-    <ImageView
-        android:id="@+id/hero_image"
-        android:layout_width="match_parent"
-        android:layout_height="160dp"
-        android:contentDescription="@string/hero_image"
-        android:src="@drawable/hero_image"
-        android:scaleType="centerCrop"
-        android:layout_marginBottom="20dp"
-        />
-
     <android.support.v7.widget.RecyclerView
         android:id="@+id/tweet_recycler_list"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:layout_below="@id/hero_image"
-        tools:listitem="@layout/tweet_item_layout" />
+        tools:listitem="@layout/tweet_item_layout"
+        />
 </RelativeLayout>
