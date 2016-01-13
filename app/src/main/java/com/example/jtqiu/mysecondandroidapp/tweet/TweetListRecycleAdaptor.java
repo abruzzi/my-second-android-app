@@ -8,7 +8,10 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.example.jtqiu.mysecondandroidapp.R;
+import com.example.jtqiu.mysecondandroidapp.model.Image;
 import com.example.jtqiu.mysecondandroidapp.model.Tweet;
+
+import org.w3c.dom.Text;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -80,14 +83,18 @@ public class TweetListRecycleAdaptor extends RecyclerView.Adapter<RecyclerView.V
 
     static class HeaderViewHolder extends RecyclerView.ViewHolder {
         ImageView heroImage;
+        ImageView myAvatar;
+        TextView myName;
 
         public HeaderViewHolder(View itemView) {
             super(itemView);
             heroImage = (ImageView) itemView.findViewById(R.id.hero_image);
+            myAvatar = (ImageView) itemView.findViewById(R.id.my_avatar);
+            myName = (TextView) itemView.findViewById(R.id.my_name);
         }
 
         public void populate(Object obj) {
-
+            myName.setText("Juntao Qiu");
         }
 
     }
